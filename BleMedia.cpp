@@ -14,7 +14,7 @@
 #include <driver/adc.h>
 #include "sdkconfig.h"
 
-#include "BleKeyboard.h"
+#include "BleMedia.h"
 
 #if defined(CONFIG_ARDUHAL_ESP_LOG)
   #include "esp32-hal-log.h"
@@ -94,13 +94,13 @@ static const uint8_t _hidReportDescriptor[] = {
   END_COLLECTION(0)                  // END_COLLECTION
 };
 
-BleKeyboard::BleKeyboard(std::string deviceName, std::string deviceManufacturer, uint8_t batteryLevel) 
+BleMedia::BleMedia(std::string deviceName, std::string deviceManufacturer, uint8_t batteryLevel) 
     : hid(0)
     , deviceName(std::string(deviceName).substr(0, 15))
     , deviceManufacturer(std::string(deviceManufacturer).substr(0,15))
     , batteryLevel(batteryLevel) {}
 
-void BleKeyboard::begin(void)
+void BleMedia::begin(void)
 {
   BLEDevice::init(deviceName);
   BLEServer* pServer = BLEDevice::createServer();
@@ -137,22 +137,22 @@ void BleKeyboard::begin(void)
   ESP_LOGD(LOG_TAG, "Advertising started!");
 }
 
-void BleKeyboard::end(void)
+void BleMedia::end(void)
 {
 }
 
-bool BleKeyboard::isConnected(void) {
+bool BleMedia::isConnected(void) {
   return this->connected;
 }
 
-void BleKeyboard::setBatteryLevel(uint8_t level) {
+void BleMedia::setBatteryLevel(uint8_t level) {
   this->batteryLevel = level;
   if (hid != 0)
     this->hid->setBatteryLevel(this->batteryLevel);
 }
 
 //must be called before begin in order to set the name
-void BleKeyboard::setName(std::string deviceName) {
+void BleMedia::setName(std::string deviceName) {
   this->deviceName = deviceName;
 }
 
@@ -161,11 +161,11 @@ void BleKeyboard::setName(std::string deviceName) {
  * 
  * @param ms Time in milliseconds
  */
-void BleKeyboard::setDelay(uint32_t ms) {
+void BleMedia::setDelay(uint32_t ms) {
   this->_delay_ms = ms;
 }
 /*  rlevent oonly to send keys
-void BleKeyboard::sendReport(KeyReport* keys)
+void BleMedia::sendReport(KeyReport* keys)
 {
   if (this->isConnected())
   {
@@ -178,7 +178,7 @@ void BleKeyboard::sendReport(KeyReport* keys)
   }	
 }
 */
-void BleKeyboard::sendReport(MediaKeyReport* keys)
+void BleMedia::sendReport(MediaKeyReport* keys)
 {
   if (this->isConnected())
   {
@@ -335,7 +335,7 @@ uint8_t USBPutChar(uint8_t c);
 // USB HID works, the host acts like the key remains pressed until we
 // call release(), releaseAll(), or otherwise clear the report and resend.
 /* not relevant for media
-size_t BleKeyboard::press(uint8_t k)
+size_t BleMedia::press(uint8_t k)
 {
 	uint8_t i;
 	if (k >= 136) {			// it's a non-printing key (not a modifier)
@@ -376,7 +376,7 @@ size_t BleKeyboard::press(uint8_t k)
 	return 1;
 }
 */
-size_t BleKeyboard::press(const MediaKeyReport k)
+size_t BleMedia::press(const MediaKeyReport k)
 {
     uint16_t k_16 = k[1] | (k[0] << 8);
     uint16_t mediaKeyReport_16 = _mediaKeyReport[1] | (_mediaKeyReport[0] << 8);
@@ -393,7 +393,7 @@ size_t BleKeyboard::press(const MediaKeyReport k)
 // sends the report.  This tells the OS the key is no longer pressed and that
 // it shouldn't be repeated any more.
 /* not relevant for same reasons
-size_t BleKeyboard::release(uint8_t k)
+size_t BleMedia::release(uint8_t k)
 {
 	uint8_t i;
 	if (k >= 136) {			// it's a non-printing key (not a modifier)
@@ -424,7 +424,7 @@ size_t BleKeyboard::release(uint8_t k)
 	return 1;
 }
 */
-size_t BleKeyboard::release(const MediaKeyReport k)
+size_t BleMedia::release(const MediaKeyReport k)
 {
     uint16_t k_16 = k[1] | (k[0] << 8);
     uint16_t mediaKeyReport_16 = _mediaKeyReport[1] | (_mediaKeyReport[0] << 8);
@@ -436,7 +436,7 @@ size_t BleKeyboard::release(const MediaKeyReport k)
 	return 1;
 }
 
-void BleKeyboard::releaseAll(void)
+void BleMedia::releaseAll(void)
 {
 	_keyReport.keys[0] = 0;
 	_keyReport.keys[1] = 0;
@@ -450,21 +450,21 @@ void BleKeyboard::releaseAll(void)
 	sendReport(&_keyReport);
 }
 
-size_t BleKeyboard::write(uint8_t c)
+size_t BleMedia::write(uint8_t c)
 {
 	uint8_t p = press(c);  // Keydown
 	release(c);            // Keyup
 	return p;              // just return the result of press() since release() almost always returns 1
 }
 
-size_t BleKeyboard::write(const MediaKeyReport c)
+size_t BleMedia::write(const MediaKeyReport c)
 {
 	uint16_t p = press(c);  // Keydown
 	release(c);            // Keyup
 	return p;              // just return the result of press() since release() almost always returns 1
 }
 
-size_t BleKeyboard::write(const uint8_t *buffer, size_t size) {
+size_t BleMedia::write(const uint8_t *buffer, size_t size) {
 	size_t n = 0;
 	while (size--) {
 		if (*buffer != '\r') {
@@ -479,24 +479,24 @@ size_t BleKeyboard::write(const uint8_t *buffer, size_t size) {
 	return n;
 }
 // from here its only usual ble stuff
-void BleKeyboard::onConnect(BLEServer* pServer) {
+void BleMedia::onConnect(BLEServer* pServer) {
   this->connected = true;
 }
 
-void BleKeyboard::onDisconnect(BLEServer* pServer) {
+void BleMedia::onDisconnect(BLEServer* pServer) {
   this->connected = false;
 #if !defined(USE_NIMBLE)
   advertising->start();
 #endif  // !USE_NIMBLE
 }
 
-void BleKeyboard::onWrite(BLECharacteristic* me) {
+void BleMedia::onWrite(BLECharacteristic* me) {
   uint8_t* value = (uint8_t*)(me->getValue().c_str());
   (void)value;
   ESP_LOGI(LOG_TAG, "special keys: %d", *value);
 }
 
-void BleKeyboard::delay_ms(uint64_t ms) {
+void BleMedia::delay_ms(uint64_t ms) {
   uint64_t m = esp_timer_get_time();
   if(ms){
     uint64_t e = (m + (ms * 1000));

@@ -103,7 +103,7 @@ typedef struct
   uint8_t keys[6];
 } KeyReport;
 
-class BleKeyboard : public Print, public BLEServerCallbacks, public BLECharacteristicCallbacks
+class BleMedia : public Print, public BLEServerCallbacks, public BLECharacteristicCallbacks
 {
 private:
   BLEHIDDevice* hid;
@@ -121,7 +121,7 @@ private:
   void delay_ms(uint64_t ms);
 
 public:
-  BleKeyboard(std::string deviceName = "ESP32 Keyboard", std::string deviceManufacturer = "Espressif", uint8_t batteryLevel = 100);
+  BleMedia(std::string deviceName = "ESP32 Keyboard", std::string deviceManufacturer = "Espressif", uint8_t batteryLevel = 100);
   void begin(void);
   void end(void);
   void sendReport(KeyReport* keys);
