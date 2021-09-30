@@ -435,7 +435,7 @@ size_t BleMedia::release(const MediaKeyReport k)
 	sendReport(&_mediaKeyReport);
 	return 1;
 }
-
+/* doesnt seem relevant
 void BleMedia::releaseAll(void)
 {
 	_keyReport.keys[0] = 0;
@@ -449,6 +449,7 @@ void BleMedia::releaseAll(void)
     _mediaKeyReport[1] = 0;
 	sendReport(&_keyReport);
 }
+*/
 /* not relevant
 size_t BleMedia::write(uint8_t c)
 {
@@ -463,7 +464,7 @@ size_t BleMedia::write(const MediaKeyReport c)
 	release(c);            // Keyup
 	return p;              // just return the result of press() since release() almost always returns 1
 }
-
+/* Doesnt seem relevant
 size_t BleMedia::write(const uint8_t *buffer, size_t size) {
 	size_t n = 0;
 	while (size--) {
@@ -478,6 +479,7 @@ size_t BleMedia::write(const uint8_t *buffer, size_t size) {
 	}
 	return n;
 }
+*/
 // from here its only usual ble stuff
 void BleMedia::onConnect(BLEServer* pServer) {
   this->connected = true;
