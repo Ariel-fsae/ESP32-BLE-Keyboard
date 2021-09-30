@@ -1,5 +1,5 @@
-#ifndef ESP32_BLE_KEYBOARD_H
-#define ESP32_BLE_KEYBOARD_H
+#ifndef ESP32_BLE_MEDIA_H
+#define ESP32_BLE_MEDIA_H
 #include "sdkconfig.h"
 #if defined(CONFIG_BT_ENABLED)na
 
@@ -25,7 +25,7 @@
 
 #include "Print.h"
 
-
+/* not relevant
 const uint8_t KEY_LEFT_CTRL = 0x80;
 const uint8_t KEY_LEFT_SHIFT = 0x81;
 const uint8_t KEY_LEFT_ALT = 0x82;
@@ -74,7 +74,7 @@ const uint8_t KEY_F21 = 0xF8;
 const uint8_t KEY_F22 = 0xF9;
 const uint8_t KEY_F23 = 0xFA;
 const uint8_t KEY_F24 = 0xFB;
-
+*/
 typedef uint8_t MediaKeyReport[2];
 
 const MediaKeyReport KEY_MEDIA_NEXT_TRACK = {1, 0};
