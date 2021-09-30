@@ -124,13 +124,13 @@ public:
   BleMedia(std::string deviceName = "ESP32 Keyboard", std::string deviceManufacturer = "Espressif", uint8_t batteryLevel = 100);
   void begin(void);
   void end(void);
-  void sendReport(KeyReport* keys);
+//  void sendReport(KeyReport* keys);
   void sendReport(MediaKeyReport* keys);
-  size_t press(uint8_t k);
+//  size_t press(uint8_t k);
   size_t press(const MediaKeyReport k);
-  size_t release(uint8_t k);
+//  size_t release(uint8_t k);
   size_t release(const MediaKeyReport k);
-  size_t write(uint8_t c);
+//  size_t write(uint8_t c);
   size_t write(const MediaKeyReport c);
   size_t write(const uint8_t *buffer, size_t size);
   void releaseAll(void);
