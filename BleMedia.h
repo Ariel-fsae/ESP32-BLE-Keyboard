@@ -108,7 +108,7 @@ class BleMedia : public Print, public BLEServerCallbacks, public BLECharacterist
 private:
   BLEHIDDevice* hid;
 //  BLECharacteristic* inputKeyboard;
-  BLECharacteristic* outputKeyboard;
+//  BLECharacteristic* outputKeyboard;
   BLECharacteristic* inputMediaKeys;
   BLEAdvertising*    advertising;
  // KeyReport          _keyReport;

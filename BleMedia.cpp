@@ -107,11 +107,11 @@ void BleMedia::begin(void)
   pServer->setCallbacks(this);
 
   hid = new BLEHIDDevice(pServer);
-  //inputKeyboard = hid->inputReport(KEYBOARD_ID);  // <-- input REPORTID from report map
-  outputKeyboard = hid->outputReport(KEYBOARD_ID);
+//  inputKeyboard = hid->inputReport(KEYBOARD_ID);  // <-- input REPORTID from report map
+//  outputKeyboard = hid->outputReport(KEYBOARD_ID);
   inputMediaKeys = hid->inputReport(MEDIA_KEYS_ID);
 
-  outputKeyboard->setCallbacks(this);
+//  outputKeyboard->setCallbacks(this);
 
   hid->manufacturer()->setValue(deviceManufacturer);
 
