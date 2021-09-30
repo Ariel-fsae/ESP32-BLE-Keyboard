@@ -190,10 +190,9 @@ void BleKeyboard::sendReport(MediaKeyReport* keys)
 #endif // USE_NIMBLE
   }	
 }
-
+/* not relevant for media
 extern
 const uint8_t _asciimap[128] PROGMEM;
-/* not relevant for media
 #define SHIFT 0x80
 const uint8_t _asciimap[128] =
 {
@@ -479,7 +478,7 @@ size_t BleKeyboard::write(const uint8_t *buffer, size_t size) {
 	}
 	return n;
 }
-
+// from here its only usual ble stuff
 void BleKeyboard::onConnect(BLEServer* pServer) {
   this->connected = true;
 }
