@@ -26,14 +26,14 @@
 
 
 // Report IDs:
-#define KEYBOARD_ID 0x01
+//#define KEYBOARD_ID 0x01 NR
 #define MEDIA_KEYS_ID 0x02
 
 static const uint8_t _hidReportDescriptor[] = {
   USAGE_PAGE(1),      0x01,          // USAGE_PAGE (Generic Desktop Ctrls)
   USAGE(1),           0x06,          // USAGE (Keyboard)
   COLLECTION(1),      0x01,          // COLLECTION (Application)
-  // ------------------------------------------------- Keyboard
+  /*// ------------------------------------------------- Keyboard NR
   REPORT_ID(1),       KEYBOARD_ID,   //   REPORT_ID (1)
   USAGE_PAGE(1),      0x07,          //   USAGE_PAGE (Kbrd/Keypad)
   USAGE_MINIMUM(1),   0xE0,          //   USAGE_MINIMUM (0xE0)
@@ -64,7 +64,7 @@ static const uint8_t _hidReportDescriptor[] = {
   USAGE_MAXIMUM(1),   0x65,          //   USAGE_MAXIMUM (0x65)
   HIDINPUT(1),        0x00,          //   INPUT (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
   END_COLLECTION(0),                 // END_COLLECTION
-  // ------------------------------------------------- Media Keys
+  */// ------------------------------------------------- Media Keys
   USAGE_PAGE(1),      0x0C,          // USAGE_PAGE (Consumer)
   USAGE(1),           0x01,          // USAGE (Consumer Control)
   COLLECTION(1),      0x01,          // COLLECTION (Application)

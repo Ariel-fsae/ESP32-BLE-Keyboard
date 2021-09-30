@@ -94,24 +94,24 @@ const MediaKeyReport KEY_MEDIA_WWW_BACK = {0, 32};
 const MediaKeyReport KEY_MEDIA_CONSUMER_CONTROL_CONFIGURATION = {0, 64}; // Media Selection
 const MediaKeyReport KEY_MEDIA_EMAIL_READER = {0, 128};
 
-
+/* NR
 //  Low level key report: up to 6 keys and shift, ctrl etc at once
 typedef struct
 {
   uint8_t modifiers;
   uint8_t reserved;
   uint8_t keys[6];
-} KeyReport;
+} KeyReport;*/
 
 class BleMedia : public Print, public BLEServerCallbacks, public BLECharacteristicCallbacks
 {
 private:
   BLEHIDDevice* hid;
-//  BLECharacteristic* inputKeyboard;
-//  BLECharacteristic* outputKeyboard;
+//  BLECharacteristic* inputKeyboard; NR
+//  BLECharacteristic* outputKeyboard; seemsNR
   BLECharacteristic* inputMediaKeys;
   BLEAdvertising*    advertising;
- // KeyReport          _keyReport;
+ // KeyReport          _keyReport; NR
   MediaKeyReport     _mediaKeyReport;
   std::string        deviceName;
   std::string        deviceManufacturer;
@@ -124,16 +124,16 @@ public:
   BleMedia(std::string deviceName = "ESP32 Keyboard", std::string deviceManufacturer = "Espressif", uint8_t batteryLevel = 100);
   void begin(void);
   void end(void);
-//  void sendReport(KeyReport* keys);
+//  void sendReport(KeyReport* keys); NR
   void sendReport(MediaKeyReport* keys);
-//  size_t press(uint8_t k);
+//  size_t press(uint8_t k); NR
   size_t press(const MediaKeyReport k);
 //  size_t release(uint8_t k);
   size_t release(const MediaKeyReport k);
-//  size_t write(uint8_t c);
+//  size_t write(uint8_t c); NR
   size_t write(const MediaKeyReport c);
-//  size_t write(const uint8_t *buffer, size_t size);
-//  void releaseAll(void);
+//  size_t write(const uint8_t *buffer, size_t size); seems NR
+//  void releaseAll(void);  seems NR
   bool isConnected(void);
   void setBatteryLevel(uint8_t level);
   void setName(std::string deviceName);  
@@ -147,4 +147,4 @@ protected:
 };
 
 #endif // CONFIG_BT_ENABLED
-#endif // ESP32_BLE_KEYBOARD_H
+#endif // ESP32_BLE_MEDIA_H
