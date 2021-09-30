@@ -107,11 +107,11 @@ class BleMedia : public Print, public BLEServerCallbacks, public BLECharacterist
 {
 private:
   BLEHIDDevice* hid;
-  BLECharacteristic* inputKeyboard;
+//  BLECharacteristic* inputKeyboard;
   BLECharacteristic* outputKeyboard;
   BLECharacteristic* inputMediaKeys;
   BLEAdvertising*    advertising;
-  KeyReport          _keyReport;
+ // KeyReport          _keyReport;
   MediaKeyReport     _mediaKeyReport;
   std::string        deviceName;
   std::string        deviceManufacturer;
@@ -132,8 +132,8 @@ public:
   size_t release(const MediaKeyReport k);
 //  size_t write(uint8_t c);
   size_t write(const MediaKeyReport c);
-  size_t write(const uint8_t *buffer, size_t size);
-  void releaseAll(void);
+//  size_t write(const uint8_t *buffer, size_t size);
+//  void releaseAll(void);
   bool isConnected(void);
   void setBatteryLevel(uint8_t level);
   void setName(std::string deviceName);  
