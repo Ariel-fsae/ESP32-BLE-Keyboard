@@ -164,7 +164,7 @@ void BleKeyboard::setName(std::string deviceName) {
 void BleKeyboard::setDelay(uint32_t ms) {
   this->_delay_ms = ms;
 }
-
+/*  rlevent oonly to send keys
 void BleKeyboard::sendReport(KeyReport* keys)
 {
   if (this->isConnected())
@@ -177,7 +177,7 @@ void BleKeyboard::sendReport(KeyReport* keys)
 #endif // USE_NIMBLE
   }	
 }
-
+*/
 void BleKeyboard::sendReport(MediaKeyReport* keys)
 {
   if (this->isConnected())
@@ -193,7 +193,7 @@ void BleKeyboard::sendReport(MediaKeyReport* keys)
 
 extern
 const uint8_t _asciimap[128] PROGMEM;
-
+/* not relevant for media
 #define SHIFT 0x80
 const uint8_t _asciimap[128] =
 {
@@ -327,7 +327,7 @@ const uint8_t _asciimap[128] =
 	0x35|SHIFT,    // ~
 	0				// DEL
 };
-
+*/
 
 uint8_t USBPutChar(uint8_t c);
 
@@ -335,6 +335,7 @@ uint8_t USBPutChar(uint8_t c);
 // to the persistent key report and sends the report.  Because of the way
 // USB HID works, the host acts like the key remains pressed until we
 // call release(), releaseAll(), or otherwise clear the report and resend.
+/* not relevant for media
 size_t BleKeyboard::press(uint8_t k)
 {
 	uint8_t i;
@@ -375,7 +376,7 @@ size_t BleKeyboard::press(uint8_t k)
 	sendReport(&_keyReport);
 	return 1;
 }
-
+*/
 size_t BleKeyboard::press(const MediaKeyReport k)
 {
     uint16_t k_16 = k[1] | (k[0] << 8);
@@ -392,6 +393,7 @@ size_t BleKeyboard::press(const MediaKeyReport k)
 // release() takes the specified key out of the persistent key report and
 // sends the report.  This tells the OS the key is no longer pressed and that
 // it shouldn't be repeated any more.
+/* not relevant for same reasons
 size_t BleKeyboard::release(uint8_t k)
 {
 	uint8_t i;
@@ -422,7 +424,7 @@ size_t BleKeyboard::release(uint8_t k)
 	sendReport(&_keyReport);
 	return 1;
 }
-
+*/
 size_t BleKeyboard::release(const MediaKeyReport k)
 {
     uint16_t k_16 = k[1] | (k[0] << 8);
