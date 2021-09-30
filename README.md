@@ -1,18 +1,17 @@
-# ESP32 BLE Keyboard library
+# ESP32 BLE ConsumerControl library
 
-This library allows you to make the ESP32 act as a Bluetooth Keyboard and control what it does.  
+This library allows you to make the ESP32 act as a Bluetooth Media conroller.  
 You might also be interested in:
+- [ESP32-BLE-Keyboard](https://github.com/T-vK/ESP32-BLE-Keyboard)
 - [ESP32-BLE-Mouse](https://github.com/T-vK/ESP32-BLE-Mouse)
 - [ESP32-BLE-Gamepad](https://github.com/lemmingDev/ESP32-BLE-Gamepad)
 
 
 ## Features
 
- - [x] Send key strokes
- - [x] Send text
- - [x] Press/release individual keys
+
  - [x] Media keys are supported
- - [ ] Read Numlock/Capslock/Scrolllock state
+
  - [x] Set battery level (basically works, but doesn't show up in Android's status bar)
  - [x] Compatible with Android
  - [x] Compatible with Windows
@@ -78,11 +77,11 @@ https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
 Just remember that you have to use `bleKeyboard` instead of just `Keyboard` and you need these two lines at the top of your script:
 ```
-#include <BleKeyboard.h>
-BleKeyboard bleKeyboard;
+#include <BleMedia.h>
+BleMedia bleKeyboard;
 ```
 
-In addition to that you can send media keys (which is not possible with the USB keyboard library). Supported are the following:
+You can send media keys (which is not possible with the USB keyboard library). Supported are the following:
 - KEY_MEDIA_NEXT_TRACK
 - KEY_MEDIA_PREVIOUS_TRACK
 - KEY_MEDIA_STOP
@@ -150,7 +149,8 @@ build-flags =
 ```
 
 ## Credits
-
-Credits to [chegewara](https://github.com/chegewara) and [the authors of the USB keyboard library](https://github.com/arduino-libraries/Keyboard/) as this project is heavily based on their work!  
+Special credits to [T-vK](https://github.com/T-vK) and [the authors of the USB keyboard library](https://github.com/T-vK/ESP32-BLE-Keyboard) as this project is **a reduced version of his project and their work!**
+Credits to [chegewara](https://github.com/chegewara) and [the authors of the ESP32 BLE Keyboard library
+](https://github.com/arduino-libraries/Keyboard/) as this project is heavily based on their work!  
 Also, credits to [duke2421](https://github.com/T-vK/ESP32-BLE-Keyboard/issues/1) who helped a lot with testing, debugging and fixing the device descriptor!
 And credits to [sivar2311](https://github.com/sivar2311) for adding NimBLE support, greatly reducing the memory footprint, fixing advertising issues and for adding the `setDelay` method.
