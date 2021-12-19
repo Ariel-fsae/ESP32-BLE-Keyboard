@@ -450,14 +450,14 @@ void BleMedia::releaseAll(void)
 	sendReport(&_keyReport);
 }
 */
-/* not relevant
+/* not relevant */
 size_t BleMedia::write(uint8_t c)
 {
 	uint8_t p = press(c);  // Keydown
 	release(c);            // Keyup
 	return p;              // just return the result of press() since release() almost always returns 1
 }
-*/
+/**/
 size_t BleMedia::write(const MediaKeyReport c)
 {
 	uint16_t p = press(c);  // Keydown

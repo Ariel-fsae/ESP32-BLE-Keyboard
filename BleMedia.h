@@ -1,7 +1,7 @@
 #ifndef ESP32_BLE_MEDIA_H
 #define ESP32_BLE_MEDIA_H
 #include "sdkconfig.h"
-#if defined(CONFIG_BT_ENABLED)na
+#if defined(CONFIG_BT_ENABLED)
 
 #if defined(USE_NIMBLE)
 
@@ -130,7 +130,7 @@ public:
   size_t press(const MediaKeyReport k);
 //  size_t release(uint8_t k);
   size_t release(const MediaKeyReport k);
-//  size_t write(uint8_t c); NR
+  size_t write(uint8_t c); //NR
   size_t write(const MediaKeyReport c);
 //  size_t write(const uint8_t *buffer, size_t size); seems NR
 //  void releaseAll(void);  seems NR
